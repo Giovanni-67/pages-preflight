@@ -1,0 +1,24 @@
+name: Pages Preflight
+description: Catch missing entry files, scripts, styles, and bad base paths before GitHub Pages deploys.
+branding:
+  icon: check-circle
+  color: blue
+inputs:
+  directory:
+    description: Built site directory. Use the same directory as upload-pages-artifact.
+    required: true
+  base-path:
+    description: Published URL path such as /my-repo/ or / for a root site.
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Check built site
+      shell: bash
+      env:
+        PAGES_PREFLIGHT_DIRECTORY: ${{ inputs.directory }}
+        PAGES_PREFLIGHT_BASE: ${{ inputs.base-path }}
+        PYTHONUTF8: '1'
+      run: >-
+        python "$GITHUB_ACTION_PATH/plugins/pages-preflight/skills/pages-preflight/scripts/check.py"
+        --directory="$PAGES_PREFLIGHT_DIRECTORY" --base-path="$PAGES_PREFLIGHT_BASE" --format=github

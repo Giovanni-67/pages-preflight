@@ -1,0 +1,7 @@
+{
+  "name": "pages-preflight",
+  "version": "0.1.0",
+  "description": "Find missing scripts, styles, and wrong base paths before GitHub Pages deploys.",
+  "license": "MIT",
+  "skills": "./skills/"
+}
