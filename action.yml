@@ -18,6 +18,8 @@ runs:
       env:
         PAGES_PREFLIGHT_DIRECTORY: ${{ inputs.directory }}
         PAGES_PREFLIGHT_BASE: ${{ inputs.base-path }}
+        # Git Bash would otherwise turn /my-repo/ into a Windows file path.
+        MSYS2_ARG_CONV_EXCL: '--base-path='
         PYTHONUTF8: '1'
       run: >-
         python "$GITHUB_ACTION_PATH/plugins/pages-preflight/skills/pages-preflight/scripts/check.py"
